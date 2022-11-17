@@ -11,6 +11,9 @@ include_directories(${GTEST_INCLUDE_DIRS}
 add_executable(${PROJECT_NAME}
 	../TaskList.cpp
 	../UserListener.cpp
+	GTest-TaskList-Task-Date.cpp
+	GTest-TaskList-Task.cpp
+	GTest-UserListener.cpp
 	Run.cpp
 )
 

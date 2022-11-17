@@ -1,8 +1,7 @@
 
-#pragma once
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <gtest/gtest.h>
 #include "UserListener.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +39,6 @@ TEST(TeamSoft_UserListener, Core)
     {
         std::unique_ptr<UserListener> listener = std::make_unique<UserListenerLog>(std::move(std::make_unique<TaskListLog>()));
 
-        listener->StartListening();
         const std::string exit = listener->InputForStopListening(); // input this, for stop working
 
         // temp
@@ -71,7 +69,6 @@ TEST(TeamSoft_UserListener, Core)
         listener->Do(listener->ParseInput("select * where { date < \"2010-0-0 00:00\" }"));
 
         listener->Do(listener->ParseInput("select * where { date < \"1000-0-0 00:00\" and status = \"OFF\" and name like \"any-name\" and category like \"t0\" }"));
-        listener->StopListening();
     }
 }
 
