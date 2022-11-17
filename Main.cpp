@@ -21,7 +21,7 @@ namespace TeamSoftTask
 			std::cin >> symbol;
 			while (symbol != 'y' && symbol != 'n')
 			{
-				std::cout << "Please input y or n : ";
+				std::cout << "Please input 'y' or 'n' : ";
 				std::cin >> symbol;
 			}
 			if (symbol == 'y')
@@ -38,11 +38,28 @@ namespace TeamSoftTask
 				Do(ParseInput("add \"any-name-2\" \"any-desc-2\" \"0-0-5 19:05\" \"cat2\""));
 			}
 		}
+
+		const std::string HandleException(const std::exception& err) override
+		{
+			std::cout << "throw exception, message is " << err.what() << std::endl;
+			std::cout << "do you want continue ? y/n : ";
+			char symbol;
+			std::cin >> symbol;
+			while (symbol != 'y' && symbol != 'n')
+			{
+				std::cout << "Please input 'y' or 'n' : ";
+				std::cin >> symbol;
+			}
+			if (symbol == 'y')
+			{
+				return("");
+			}
+			return (InputForStopListening());
+		}
 	};
 
 	void Main()
 	{
-		//Temp(); //for fast testing
 		std::unique_ptr<UserListener> listener = std::make_unique<ULForFastTestingWithLog>(std::move(std::make_unique<TaskList>()));
 
 		listener->StartListening();
@@ -62,18 +79,7 @@ namespace TeamSoftTask
 			}
 			catch (std::exception& err)
 			{
-				std::cout << "throw exception, message is " << err.what() << std::endl;
-				std::cout << "do you want continue ? y/n : ";
-				char symbol;
-				std::cin >> symbol;
-				if (symbol != 'y')
-				{
-					input = exit;
-				}
-				else
-				{
-					input = "";
-				}
+				input = listener->HandleException(err);
 			}
 		}
 

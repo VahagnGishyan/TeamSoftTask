@@ -72,6 +72,7 @@ namespace TeamSoftTask
 		virtual std::string ReadInput();
 		virtual const std::unique_ptr<IUserCommand> ParseInput(std::string line);
 		virtual void Do(const std::unique_ptr<IUserCommand>& command);
+		virtual const std::string HandleException(const std::exception& err);
 		virtual void StopListening();
 
 	protected:

@@ -135,6 +135,11 @@ namespace TeamSoftTask
 		}
 	}
 
+	const std::string UserListener::HandleException(const std::exception &err)
+	{
+		return (InputForStopListening());
+	}
+
 	void UserListener::StopListening()
 	{
 	}
